@@ -3,7 +3,6 @@ export function CardCustomer() {
     <article className="flex flex-col bg-gray-100 border-2 p-2 rounded-lg gap-2 hover:scale-105 duration-200">
       <h2>
         <a className="font-bold">Nome:</a> Mercado Silva
-        <a className="font-bold">Nome:</a> Mercado Silva
       </h2>
       <p>
         <a className="font-bold">Email:</a> teste@email.com
