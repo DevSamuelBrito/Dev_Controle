@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import z from "zod";
+import { Input } from "@/components/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z.object({
@@ -35,9 +36,9 @@ export function NewCostumerForm() {
   });
 
   return (
-    <form>
-      <label>Nome Completo:</label>
-      <input type="text" placeholder="Nome Completo..." />
+    <form className="flex flex-col mt-6">
+      <label className="mb-1 text-lg font-medium">Nome Completo:</label>
+      <Input />
     </form>
   );
 }
