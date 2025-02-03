@@ -1,11 +1,10 @@
-import React, { ReactNode } from "react";
-import { DashBoardHeader } from "./components/header";
+import { DashboardHeader } from '@/app/dashboard/components/header'
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <DashBoardHeader />
+      <DashboardHeader />
       {children}
     </>
-  );
+  )
 }
