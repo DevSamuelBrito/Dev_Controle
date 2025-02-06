@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/input";
 import { api } from "@/lib/api";
 import { redirect } from "next/navigation";
-import router from "next/router";
+
 
 const schema = z.object({
   name: z.string().min(1, "O campo nome é obrigatório"),
@@ -48,7 +48,7 @@ export function NewCustomerForm({ userId }: { userId: string }) {
       phone: data.phone,
       userId: userId,
     });
-    
+    //refresh
     redirect("/dashboard/customer");
   }
 
