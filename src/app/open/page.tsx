@@ -7,6 +7,11 @@ import { Input } from "@/components/input";
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
+import { api } from "@/lib/api";
+export interface CustomerDataInfo {
+  name: string;
+  id: string;
+}
 
 const OpenTicket = () => {
   const schema = z.object({
@@ -21,15 +26,12 @@ const OpenTicket = () => {
     register,
     handleSubmit,
     setValue,
+    setError,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
-  interface CustomerDataInfo {
-    name: string;
-    id: string;
-  }
   const [customer, setCustomer] = useState<CustomerDataInfo | null>(null);
 
   function handleClearCustomer() {
@@ -37,12 +39,36 @@ const OpenTicket = () => {
     setCustomer(null);
   }
 
+  async function handleSearchCustomer(data: FormData) {
+    const response = await api.get("/api/customer", {
+      params: {
+        email: data.email,
+      },
+    });
+
+    if (response.data === null) {
+      setError("email", {
+        type: "custom",
+        message: "Ops esse cliente não foi encontrado!",
+      });
+      return;
+    }
+
+    setCustomer({
+      id: response.data.id,
+      name: response.data.name,
+    });
+  }
+
   return (
     <div className="w-full max-w-2xl mx-auto px-2">
       <h1 className="font-bold text-3xl text-center mt-24 ">Abrir Chamado</h1>
       <main className="flex flex-col mt-4 mb-2">
         {!customer ? (
-          <form className="bg-slate-200 py-6 rounded border-2 px-2">
+          <form
+            onSubmit={handleSubmit(handleSearchCustomer)}
+            className="bg-slate-200 py-6 rounded border-2 px-2"
+          >
             <div className="flex flex-col gap-3">
               <Input
                 placeholder="Digite o email aqui"
@@ -63,8 +89,8 @@ const OpenTicket = () => {
           </form>
         ) : (
           <div className="bg-slate-200 py-6 px-4 rounded border-2  flex  items-center justify-between">
-            <p className="text-lg">
-              <strong>{customer.name}</strong>
+            <p className="text-lg">Cliente selecionado: 
+              <strong> {customer.name}</strong>
             </p>
             <button
               className="bg-red-600 h-11  px-2 flex items-center justify-center rounded"
@@ -75,7 +101,7 @@ const OpenTicket = () => {
           </div>
         )}
 
-        {customer !== null && <FormTicket />}
+        {customer !== null && <FormTicket customer={customer}/>}
       </main>
     </div>
   );

@@ -35,13 +35,39 @@ export async function PATCH(request: Request) {
       },
     });
 
-    return NextResponse.json({message:"Chamado atualizado"})
+    return NextResponse.json({ message: "Chamado atualizado" });
   } catch (error) {
     return NextResponse.json(
       { error: { message: "Failed to update" } },
       { status: 400 }
     );
   }
+}
 
-  return NextResponse.json({ message: "PATCH" });
+export async function POST(request: Request) {
+  const { name, description, customerId } = await request.json();
+  if (!customerId || !name || !description) {
+    return NextResponse.json(
+      { error: { message: "Failed to create new Ticket" } },
+      { status: 400 }
+    );
+  }
+  try {
+    await prismaClient.ticket.create({
+      data: {
+        name: name,
+        description: description,
+        status: "ABERTO",
+        customerId: customerId,
+      },
+    });
+    return NextResponse.json({ message: "Chamado criado com sucesso!" });
+  } catch (error) {
+    return NextResponse.json(
+      { error: { message: "Failed to create new Ticket" } },
+      { status: 400 }
+    );
+  }
+
+  return NextResponse.json({ message: "Chamado criado com sucesso!" });
 }
