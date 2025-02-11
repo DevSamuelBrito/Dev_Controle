@@ -5,7 +5,7 @@ import { CustomerProps } from "@/utils/customer.type";
 import { api } from "@/lib/api";
 import { useContext } from "react";
 
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ModalContext } from "@/providers/modal";
 
 interface TicketItemProps {

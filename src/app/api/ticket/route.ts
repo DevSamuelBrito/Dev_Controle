@@ -37,6 +37,7 @@ export async function PATCH(request: Request) {
 
     return NextResponse.json({ message: "Chamado atualizado" });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: { message: "Failed to update" } },
       { status: 400 }
@@ -63,6 +64,7 @@ export async function POST(request: Request) {
     });
     return NextResponse.json({ message: "Chamado criado com sucesso!" });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: { message: "Failed to create new Ticket" } },
       { status: 400 }

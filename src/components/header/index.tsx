@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import Link from 'next/link'
-import { FiUser, FiLogOut, FiLoader, FiLock } from 'react-icons/fi'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import Link from "next/link";
+import { FiUser, FiLogOut, FiLoader, FiLock } from "react-icons/fi";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export function Header() {
-  const { status, data } = useSession();
+  const { status } = useSession();
 
   async function handleLogin() {
     await signIn();
@@ -23,7 +23,6 @@ export function Header() {
             <span className="text-blue-500">DEV</span> CONTROLE
           </h1>
         </Link>
-
 
         {status === "loading" && (
           <button className="animate-spin">
@@ -48,9 +47,7 @@ export function Header() {
             </button>
           </div>
         )}
-
-
       </div>
     </header>
-  )
+  );
 }

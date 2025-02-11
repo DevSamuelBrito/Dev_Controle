@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 export function CardCustomer({ customer }: { customer: CustomerProps }) {
   const router = useRouter();
 
-  async function handleDeleteHCustomer() {
+  async function handleDeleteCustomer() {
     try {
       const response = await api.delete("/api/customer", {
         params: {
@@ -32,7 +32,7 @@ export function CardCustomer({ customer }: { customer: CustomerProps }) {
       </p>
 
       <button
-        onClick={handleDeleteHCustomer}
+        onClick={handleDeleteCustomer}
         className="bg-red-500 px-4 rounded text-white mt-2 self-start"
       >
         Deletar

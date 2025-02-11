@@ -20,9 +20,9 @@ export async function GET(request: Request) {
 
     return NextResponse.json(customer);
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ error: "Customer not found" }, { status: 400 });
   }
-
 }
 
 //rota para deletar um cliente
@@ -65,7 +65,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({ message: "Cliente deletado com sucesso!" });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return NextResponse.json(
       { error: "Failed delete customer" },
       { status: 400 }
@@ -96,6 +96,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ message: "Cliente cadastrado com sucesso!" });
   } catch (err) {
+    console.error(err);
     return NextResponse.json(
       { error: "Failed crete new customer" },
       { status: 400 }
